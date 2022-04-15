@@ -6,3 +6,10 @@ An mobile application that can be used to keep track of the time you spend on yo
 
 This project is a starting point for a Flutter application.
 
+In the project directory, you can run:
+
+### `flutter run`
+
+to run a local instance of the application in your browser
+
+

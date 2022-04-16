@@ -32,179 +32,94 @@ class MyApp extends StatelessWidget {
             title: const Text('Time Tracker App'),
           ),
           body: ListView(
-            children: [
-              GestureDetector(
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              const Expanded(
-                                flex: 3,
-                                child: Text(
-                                  "Flutter Video 2",
-                                  style: TextStyle(fontSize: 25),
-                                ),
-                              ),
-                              Expanded(
-                                  child: Text(
-                                "Flutter Project",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.lightBlue[600]),
-                              ))
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10.0,
-                          ),
-                          const Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text("8.00AM - 8.30AM"),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SecondScreen(),
-                        ));
-                  }),
-              GestureDetector(
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              const Expanded(
-                                flex: 3,
-                                child: Text(
-                                  "Spanish Lesson 3",
-                                  style: TextStyle(fontSize: 25),
-                                ),
-                              ),
-                              Expanded(
-                                  child: Text(
-                                "Spanish Project",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red[600]),
-                              ))
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10.0,
-                          ),
-                          const Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text("10.00AM - 10.30AM"),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SecondScreen(),
-                        ));
-                  }),
-              GestureDetector(
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              const Expanded(
-                                flex: 3,
-                                child: Text(
-                                  "Ideation",
-                                  style: TextStyle(fontSize: 25),
-                                ),
-                              ),
-                              Expanded(
-                                  child: Text(
-                                "Portfolio Project",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.yellow[600]),
-                              ))
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10.0,
-                          ),
-                          const Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text("3.00PM - 3.30PM"),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SecondScreen(),
-                        ));
-                  }),
-              GestureDetector(
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              const Expanded(
-                                flex: 3,
-                                child: Text(
-                                  "Flexbox Challenge 2",
-                                  style: TextStyle(fontSize: 25),
-                                ),
-                              ),
-                              Expanded(
-                                  child: Text(
-                                "CSS Project",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.green[600]),
-                              ))
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10.0,
-                          ),
-                          const Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text("12.00AM - 12.30AM"),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SecondScreen(),
-                        ));
-                  }),
+            children: const [
+              ItemCard(
+                activity: "Flutter Video 2",
+                time: "8:30AM - 9:30AM",
+                project: "Flutter Project",
+                color: Colors.blue,
+              ),
+              ItemCard(
+                activity: "Spanish Lesson 3",
+                time: "11:30AM - 12:30AM",
+                project: "Spanish Project",
+                color: Colors.red,
+              ),
+              ItemCard(
+                activity: "Ideation",
+                time: "8:30PM - 9:30PM",
+                project: "Portfolio Project",
+                color: Colors.yellow,
+              ),
+              ItemCard(
+                activity: "Flexbox Challenge 2",
+                time: "9:30PM - 11:30PM",
+                project: "CSS Project",
+                color: Colors.green,
+              ),
             ],
             padding: const EdgeInsets.all(10),
           ),
         ));
+  }
+}
+
+class ItemCard extends StatelessWidget {
+  final String activity;
+  final String time;
+  final String project;
+  final Color color;
+  const ItemCard({
+    Key? key,
+    required this.activity,
+    required this.time,
+    required this.project,
+    required this.color,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Text(
+                        activity,
+                        style: const TextStyle(fontSize: 25),
+                      ),
+                    ),
+                    Expanded(
+                        child: Text(
+                      project,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, color: color),
+                    ))
+                  ],
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(time),
+                )
+              ],
+            ),
+          ),
+        ),
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SecondScreen(),
+              ));
+        });
   }
 }
 

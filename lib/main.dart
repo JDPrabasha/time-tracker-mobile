@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert'; // for using json.decode()
 
 void main() {
   runApp(const MaterialApp(
@@ -27,40 +29,74 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Time Tracker App'),
+        home: HomePage());
+  }
+}
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  // The list that contains information about photos
+  List _loadedProjects = [];
+
+  // The function that fetches data from the API
+  Future<void> _fetchData() async {
+    const API_URL = 'http://localhost:3000/project';
+
+    final response = await http.get(Uri.parse(API_URL));
+    final data = json.decode(response.body);
+
+    setState(() {
+      _loadedProjects = data;
+      print(_loadedProjects);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Time Tracker App'),
+      ),
+      body: ListView(
+        children: const [
+          ItemCard(
+            activity: "Flutter Video 2",
+            time: "8:30AM - 9:30AM",
+            project: "Flutter Project",
+            color: Colors.blue,
           ),
-          body: ListView(
-            children: const [
-              ItemCard(
-                activity: "Flutter Video 2",
-                time: "8:30AM - 9:30AM",
-                project: "Flutter Project",
-                color: Colors.blue,
-              ),
-              ItemCard(
-                activity: "Spanish Lesson 3",
-                time: "11:30AM - 12:30AM",
-                project: "Spanish Project",
-                color: Colors.red,
-              ),
-              ItemCard(
-                activity: "Ideation",
-                time: "8:30PM - 9:30PM",
-                project: "Portfolio Project",
-                color: Colors.yellow,
-              ),
-              ItemCard(
-                activity: "Flexbox Challenge 2",
-                time: "9:30PM - 11:30PM",
-                project: "CSS Project",
-                color: Colors.green,
-              ),
-            ],
-            padding: const EdgeInsets.all(10),
+          ItemCard(
+            activity: "Spanish Lesson 3",
+            time: "11:30AM - 12:30AM",
+            project: "Spanish Project",
+            color: Colors.red,
           ),
-        ));
+          ItemCard(
+            activity: "Ideation",
+            time: "8:30PM - 9:30PM",
+            project: "Portfolio Project",
+            color: Colors.yellow,
+          ),
+          ItemCard(
+            activity: "Flexbox Challenge 2",
+            time: "9:30PM - 11:30PM",
+            project: "CSS Project",
+            color: Colors.green,
+          ),
+        ],
+        padding: const EdgeInsets.all(10),
+      ),
+    );
   }
 }
 
